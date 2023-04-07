@@ -18,6 +18,17 @@ app.get('/', function(req, res) {
   res.send(outstring);
 });
 
+//Read file
+app.get('/rest/list/', function(req, res){
+  fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
+    if(err) {
+      console.log(err);
+    } else {
+      const data = JSON.parse(jsonString);
+      console.log(data.description);
+    }
+  });
+});
 
 // Write to a file 
 
