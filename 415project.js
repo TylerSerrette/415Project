@@ -20,7 +20,8 @@ app.get('/', function(req, res) {
 
 //Read file
 app.get('/rest/list/', function(req, res){
-  fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
+  const myquery = req.query;
+  var outstring = fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
     if(err) {
       console.log(err);
     } else {
