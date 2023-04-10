@@ -18,18 +18,6 @@ app.get('/', function(req, res) {
   res.send(outstring);
 });
 
-//Read file
-app.get('/rest/list/', function(req, res){
-  const myquery = req.query;
-  var outstring = fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
-    if(err) {
-      console.log(err);
-    } else {
-      const data = JSON.parse(jsonString);
-      console.log(data.description);
-    }
-  });
-});
 
 // Write to a file 
 
@@ -56,11 +44,13 @@ app.get('/wfile', function(req, res) {
 // Simple cascade
 app.param('name', function(req, res, next, name) {
   const modified = name.toUpperCase();
-
   req.name = modified;
   next();
 });
 
+app.get('/api/say/:name', function(req, res) {
+  res.send('Hello ' + req.name + '!');
+});
 
 // A POST request
 
@@ -75,5 +65,3 @@ app.post('/post/users', function(req, res) {
     'geo': geo
   });
 });
-
-
