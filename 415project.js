@@ -65,3 +65,19 @@ app.post('/post/users', function(req, res) {
     'geo': geo
   });
 });
+
+app.get('/rest/list', function(req,res) {
+  fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
+    if (err)  {
+      console.log(err);
+    } else {
+      try {
+        const data = JSON.parse(jsonString);
+        console.log(data.id);
+      } catch (err) {
+        console.log('Error parsing JSON', err);
+      }
+    }
+  });
+});
+  
