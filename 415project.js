@@ -81,10 +81,7 @@ app.post('/rest/ticket', express.json(), (req, res) => {
 //GET all function
 
 app.get('/rest/list/', (req, res) =>{
-  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, data){
-    console.log(data);
     res.send(data);
-  });
 })
 
 //GET by id
