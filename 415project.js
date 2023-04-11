@@ -12,6 +12,30 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes will go here
 
+let tickets = [
+  {
+    "id": 35436,
+    "created_at": "2015-07-20T22:55:29Z",
+    "updated_at": "2016-05-05T10:38:52Z",
+    "type": "incident",
+    "subject": "MFP not working right",
+    "description": "PC Load Letter? What does that even mean???",
+    "priority": "med",
+    "status": "open",
+    "recipient": "support_example@selu.edu",
+    "submitter": "Michael_bolton@selu.edu",
+    "assignee_id": 235323,
+    "follower_ids": [
+        235323,
+        234
+    ],
+    "tags": [
+        "enterprise",
+        "printers"
+    ]
+  }
+];
+
 app.get('/', function(req, res) {
   const myquery = req.query;
   var outstring = 'Starting... ';
@@ -20,7 +44,7 @@ app.get('/', function(req, res) {
 
 
 // Write to a file 
-
+/*
 app.get('/wfile', function(req, res) {
   const myquery = req.query;
   
@@ -39,7 +63,7 @@ app.get('/wfile', function(req, res) {
   res.send(outstring);
 
 });
-
+*/
 
 
 
@@ -79,8 +103,19 @@ app.get('/rest/tickets/:id', (req,res) => {
 })
 */
 
-
+/*
 app.get('/rest/tickets/:id', async (req, res) => {
   const ticket = await ticket.findById(req.params.id);
   res.json(data);
+});
+*/
+
+app.get('/rest/tickets/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const ticket = tickets.find(t => t.id == req.params.id);
+  if (!ticket) {
+    res.sendStatus(404);
+  } else {
+    res.json(ticket);
+  }
 });
