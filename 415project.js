@@ -49,7 +49,6 @@ app.post('/rest/ticket', express.json(), (req, res) => {
   ticket.id = Date.now(); // Assign a unique id
   tickets.push(ticket);
   res.send(ticket);
-  //console.log(Created ticket with id ${ticket.id});
 });
 
 
