@@ -73,8 +73,8 @@ app.post('/rest/ticket', express.json(), (req, res) => {
   const ticket = req.body;
   ticket.id = Date.now(); // Assign a unique id
   tickets.push(ticket);
-  console.log(Created ticket with id ${ticket.id});
   res.send(ticket);
+  //console.log(Created ticket with id ${ticket.id});
 });
 
 
