@@ -81,7 +81,7 @@ app.post('/rest/ticket', express.json(), (req, res) => {
 //GET all function
 
 app.get('/rest/list/', (req, res) =>{
-    res.send(data);
+    res.send(ticket);
 })
 
 //GET by id
