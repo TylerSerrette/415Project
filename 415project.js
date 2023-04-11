@@ -41,16 +41,7 @@ app.get('/wfile', function(req, res) {
 });
 
 
-// Simple cascade
-app.param('name', function(req, res, next, name) {
-  const modified = name.toUpperCase();
-  req.name = modified;
-  next();
-});
 
-app.get('/api/say/:name', function(req, res) {
-  res.send('Hello ' + req.name + '!');
-});
 
 // A POST request
 
@@ -66,18 +57,20 @@ app.post('/post/users', function(req, res) {
   });
 });
 
-app.get('/rest/list', function(req,res) {
-  fs.readFile('./tickets.json', 'utf-8', (err, jsonString) => {
-    if (err)  {
-      console.log(err);
-    } else {
-      try {
-        const data = JSON.parse(jsonString);
-        console.log(data.id);
-      } catch (err) {
-        console.log('Error parsing JSON', err);
-      }
-    }
+
+//GET all function
+
+app.get('/rest/list/', (req, res) =>{
+  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, data){
+    console.log(data);
+    res.send(data);
   });
-});
-  
+})
+
+//GET by id
+app.get('/get/tickets/:id', (req,res) => {
+  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, id){
+    console.log(id);
+    res.send(req.params.id);
+  });
+})
