@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser=require('body-parser');
+//const bodyParser=require('body-parser');
 const app = express();
 const port = 3000;
 var fs = require("fs");
@@ -7,8 +7,8 @@ var fs = require("fs");
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.json());
+//app.use(express.urlencoded({ extended: true }));
 
 // routes will go here
 
@@ -42,31 +42,6 @@ app.get('/', function(req, res) {
   res.send(outstring);
 });
 
-
-// Write to a file 
-/*
-app.get('/wfile', function(req, res) {
-  const myquery = req.query;
-  
-  var outstring = '';
-  for(var key in myquery) { outstring += "--" + key + ">" + myquery[key]; }
-  fs.appendFile("mydata.txt", outstring+'\n', (err) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("File written successfully\n");
-      console.log("Contents of file now:\n");
-      console.log(fs.readFileSync("mydata.txt", "utf8"));
-    }
-  });
- 
-  res.send(outstring);
-
-});
-*/
-
-
-
 // A POST request
 
 app.post('/rest/ticket', express.json(), (req, res) => {
@@ -81,27 +56,10 @@ app.post('/rest/ticket', express.json(), (req, res) => {
 //GET all function
 
 app.get('/rest/list/', (req, res) =>{
-    res.send(ticket);
+    res.send(tickets);
 })
 
 //GET by id
-/*
-app.get('/rest/tickets/:id', (req,res) => {
-  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, data){
-    const id = parseInt(req.params.id);
-    const data = data.find((d)=>d.id === id);
-    console.log(id);
-    res.send(data);
-  });
-})
-*/
-
-/*
-app.get('/rest/tickets/:id', async (req, res) => {
-  const ticket = await ticket.findById(req.params.id);
-  res.json(data);
-});
-*/
 
 app.get('/rest/tickets/:id', (req, res) => {
   const id = parseInt(req.params.id);
