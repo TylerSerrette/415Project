@@ -69,11 +69,12 @@ app.get('/wfile', function(req, res) {
 
 // A POST request
 
-app.post('/rest/tickets', (req, res) => {
+app.post('/rest/ticket', express.json(), (req, res) => {
   const ticket = req.body;
-  ticket.id = tickets.length + 1;
+  ticket.id = Date.now(); // Assign a unique id
   tickets.push(ticket);
-  res.json(ticket);
+  console.log(Created ticket with id ${ticket.id});
+  res.send(ticket);
 });
 
 
