@@ -68,9 +68,19 @@ app.get('/rest/list/', (req, res) =>{
 })
 
 //GET by id
-app.get('/get/tickets/:id', (req,res) => {
-  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, id){
+/*
+app.get('/rest/tickets/:id', (req,res) => {
+  fs.readFile(__dirname + "/tickets.json", 'utf8', function(err, data){
+    const id = parseInt(req.params.id);
+    const data = data.find((d)=>d.id === id);
     console.log(id);
-    res.send(req.params.id);
+    res.send(data);
   });
 })
+*/
+
+
+app.get('/rest/tickets/:id', async (req, res) => {
+  const ticket = await ticket.findById(req.params.id);
+  res.json(data);
+});
